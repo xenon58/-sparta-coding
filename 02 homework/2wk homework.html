@@ -15,7 +15,7 @@
 
     <!-- CSS style 파일 분리 -->
     <link rel="stylesheet" type="text/css" href="1wk homework css.css">
-    
+
     <style>
         .dropdown {
             padding: auto;
@@ -30,7 +30,7 @@
         function orderCheck() {
             // 각 변수를 지정해 주고//
             let inputName = $("#input-name").val();
-            // let inputSelect = $("#input-select option:selected").val();
+            let inputSelect = $("#input-select option:selected").val();
             let inputAddress = $("#input-address").val();
             let inputNumber = $("#input-number").val();
 
@@ -38,9 +38,9 @@
             if (inputName == '') {
                 alert('주문자 성함을 입력해 주세요!');
                 $("#input-name").focus();
-            // } else if (inputSelect == '') {
-            //     alert('검사종류를 선택하세요!');
-            //     $("#input-select").focus();
+            } else if (inputSelect == '') {
+                alert('검사종류를 선택하세요!');
+                $("#input-select").focus();
             } else if (inputAddress == '') {
                 alert('주소를 입력해주세요!');
                 $("#input-address").focus();
