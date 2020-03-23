@@ -8,6 +8,10 @@ body {
         sans-serif;
 }
 
+input {
+    font-family: 'Nanum Gothic Coding', monospace;
+}
+
 .heading {
     font-family: 'Sunflower', sans-serif;
     font-size: 40px;
@@ -26,4 +30,12 @@ body {
     width: 650px;
     margin: auto;
     font-family: 'Sunflower', sans-serif;
+}
+
+/* dropbox select 변경 */
+#input-select {
+    font-family: nanum;
+    color: #555555;
+    appearance: none;
+    padding: 4px;
 }

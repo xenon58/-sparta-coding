@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2주차 숙제</title>
+
+    <!-- jQuery import -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- bootstrap 사용위함 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- CSS style 파일 분리 -->
+    <link rel="stylesheet" type="text/css" href="1wk homework css.css">
+    
+    <style>
+        .dropdown {
+            padding: auto;
+            margin: auto;
+        }
+    </style>
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css?family=Stylish|Sunflower:300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+
+    <script>
+        function orderCheck() {
+            // 각 변수를 지정해 주고//
+            let inputName = $("#input-name").val();
+            // let inputSelect = $("#input-select option:selected").val();
+            let inputAddress = $("#input-address").val();
+            let inputNumber = $("#input-number").val();
+
+            // 변수마다 값을 확인하고 없으면 alert 띄우고 focus맞추고. 있으면 넘어가고)
+            if (inputName == '') {
+                alert('주문자 성함을 입력해 주세요!');
+                $("#input-name").focus();
+            // } else if (inputSelect == '') {
+            //     alert('검사종류를 선택하세요!');
+            //     $("#input-select").focus();
+            } else if (inputAddress == '') {
+                alert('주소를 입력해주세요!');
+                $("#input-address").focus();
+            } else if (inputNumber == '') {
+                alert('전화번호를 입력해 주세요!');
+                $("#input-number").focus();
+            } else {
+                alert("신청 완료 되었습니다.")
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="total">
+        <!--  상단부 사진 -->
+        <p align="center">
+            <img
+                src='https://lh4.googleusercontent.com/proxy/ILiog6lZLnPTt6cSPa3lXx_aB3Z8Ps6Ratehoy4PA-CrtuRk-mMlTKk3IMTJVNGISSHGQh-MdlgOBzyngHhc14mWzgSrIGpWmitpoIGh39eQBOwwV1QmyXOXCe46bE5kp0L4fSQ1DEZRLFwCX6rt701r3Zhb4uk5TreOmlsZuxZ6Woo'>
+        </p>
+
+        <!-- 제목과 설명 -->
+        <div class="headdescription">
+            <span class="heading" style="font-weight:bold"> 종합건강검진센터 </span>
+
+            <!-- badge bootstrap -->
+            <span class="badge badge-pill badge-primary">인기!!</span>
+
+            <span class="small heading" style="font-size:12px">
+                <span style=color:rgb(177,47,47)> 다양한 프로그램</span>을 갖춘 종합건진센터에서 검사받으세요!!
+            </span>
+
+            <p>
+                저희 건강검진센터는 개개인의 건강한 삶을 위하여 건강진단 및 건강증진 프로그램을 다양하게 시행하고 있습니다.
+                보다 과학적이고 전문적으로 신속, 정확한 검사를 위해 각 분야의 전문 인력과 다양한 프로그램, 첨단 장비를 갖추고 있습니다.
+                또한 쾌적한 실내 환경에서 편안히 검사를 받으실 수 있도록 최선을 다하고 있습니다.
+            </p>
+        </div>
+
+        <!-- 주문서 -->
+        <div class="content">
+            <h2> 신청 양식</h2>
+            <p></p>
+            <form>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">주문자성함</label>
+                    <div class="col-sm-10">
+                        <input id="input-name" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">검사종류</label>
+                    <div class="col-sm-10">
+                        <!-- dropbox로 변경 -->
+                        <div class="dropdown">
+                            <select id="input-select">
+                                <option selected value>원하시는 항목을 선택해 주세요.</option>
+                                <option value='1'>머리부터 발끝까지 whole body 검진</option>
+                                <option value='2'>뇌 MRI + 갑상선 초음파</option>
+                                <option value='3'>복부 CT와 상복부/비뇨기 초음파</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">주소</label>
+                    <div class="col-sm-10">
+                        <input id="input-address" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">전화번호</label>
+                    <div class="col-sm-10">
+                        <input id="input-number" type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <center><button onclick='orderCheck()' id="confirmBtn" type="submit"
+                                class="btn btn-primary">건강검진 신청하기</button>
+                        </center>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
