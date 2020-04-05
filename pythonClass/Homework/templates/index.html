@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>내을은 늦습니다! 오늘 바로 건강검진!!</title>
+    <title>내일은 늦습니다! 오늘 바로 건강검진!!</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -13,15 +13,7 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-
 
     <!-- CSS style 파일 분리 -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='homeworkcss.css') }}">
@@ -31,10 +23,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 
     <script type="text/javascript">
-        function confirm() {
+        function send_inform() {
             // 각 변수를 지정해 주고//
             let inputName = $("#input_name").val();
-            let inputSelect = $("#input_select option:selected").val();
+            let inputSelect = $("#input_select").val();
             let inputAddress = $("#input_address").val();
             let inputNumber = $("#input_number").val();
             // 변수마다 값을 확인하고 없으면 alert 띄우고 focus맞추고. 있으면 넘어가고)
@@ -55,14 +47,6 @@
                 $("#input_number").focus();
                 return;
             }
-            // else {
-            //     alert("신청 완료 되었습니다.");
-            //     $("#input-name").val('');
-            //     $("#input-select").val('');
-            //     $("#input-address").val('');
-            //     $("#input-number").val('');
-            //     return
-            // }
             // post /confirm 에 저장을 요청
             $.ajax({
                 type: "POST",
@@ -85,10 +69,11 @@
                 }
             });
         }
-        // $(document).ready(function () {
-        //     $("#orders_box").html('');
-        //     listing();
-        // });
+
+        $(document).ready(function () {
+            $("#orders_box").html('');
+            listing();
+        });
 
         // 아래 list 가 나오도록 하는 get 요청
         function listing() {
@@ -187,7 +172,7 @@
             <!-- 마지막 신청 버튼 -->
             <div class="form-group row">
                 <div class="col-sm-10" style="text-align:center">
-                    <button onclick="confirm()" id="confirm_btn" type="submit" class="btn btn-primary">건강검진
+                    <button onclick="send_inform()" type="submit" class="btn btn-primary">건강검진
                         신청하기</button>
                 </div>
             </div>
