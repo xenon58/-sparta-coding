@@ -13,17 +13,20 @@ def home():
 ## API 역할을 하는 부분
 @app.route('/content', methods=['POST'])
 def message_post():
-   name_receive = request.form['name_give']
-   select_receive = request.form['select_give']
-   address_receive = request.form['address_give']
-   number_receive = request.form['number_give']
-   # doc={'name': name_receive, 'select': select_receive,'address': address_receive,'number': number_receive}
-   # db.homework.insert_one(doc)
-   # return jsonify({'result':'success','msg': '리뷰가 성공적으로 작성되었습니다.'})
+   title_receive = request.form["title_give"]
+   author_receive = request.form['author_give']
+   review_receive = request.form['review_give']
+   doc={
+      'title':title_receive,
+      'author':author_receive,
+      'review':review_receive
+   }
+   db.reviews.insert_one(doc)
+   return jsonify({'result':'success', 'msg': '리뷰가 성공적으로 작성되었습니다.'})
 
 @app.route('/content', methods=['GET'])
 def message_get():
-   send_data = list(db.homework.find({},{'_id':False}))
+   send_data = list(db.reviews.find({},{'_id':False}))
    return jsonify({'result':'success', 'msg': send_data})
 
 if __name__ == '__main__':
