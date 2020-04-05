@@ -1,0 +1,42 @@
+body {
+    color: #555555;
+}
+
+/* google font*/
+* {
+    font-family: 'Stylish',
+        sans-serif;
+}
+
+input {
+    font-family: 'Nanum Gothic Coding', monospace;
+}
+
+.heading {
+    font-family: 'Sunflower', sans-serif;
+    font-size: 40px;
+}
+
+.total {
+    width: 750px;
+    margin: 30px auto auto auto;
+}
+
+.headdescription {
+    margin: 30px auto 30px auto;
+}
+
+.content {
+    width: 650px;
+    margin: auto;
+    font-family: 'Sunflower', sans-serif;
+}
+
+/* dropbox select 변경 */
+#input-select {
+    font-family: nanum;
+    color: #555555;
+    appearance: none;
+    padding: 4px;
+}
+
