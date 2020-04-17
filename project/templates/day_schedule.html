@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인터벤션 스케쥴입력</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            // index.html 로드가 완료되면 자동으로 show_cases() 함수를 호출
+            show_cases();
+        });
+
+        function show_cases() {
+            // 1. #case_box의 내부 html 태그를 모두 삭제
+            // $('#case-box').empty();
+            // 오늘 날짜를 불러서 today로 지정
+            let today = new Date();
+            let dd = today.getDate();
+            let mm = today.getMonth() + 1; //January is 0!
+            let yyyy = today.getFullYear();
+            if (dd < 10) { dd = '0' + dd }
+            if (mm < 10) { mm = '0' + mm }
+            today = yyyy + '-' + mm + '-' + dd;
+            console.log(today);
+
+            // 2. 서버에 1) POST 방식으로 오늘 날짜에 맞는 data를 요청하겠다.
+            $.ajax({
+                type: "POST",
+                url: "/today_data",
+                data: { today_date_give: today },
+                success: function (response) {
+                    // 3. 서버가 돌려준 response를 interv_cases라는 변수에 저장합니다.
+                    let interv_cases = response['raw_data']
+                    console.log(response);
+                    // 4. for 문을 활용하여 star 배열의 요소를 차례대로 조회합니다.
+                    for (let i = 0; i < interv_cases.length; i++) {
+                        let interv_case = interv_cases[i];
+                        // 5. interv_cases[i] 요소의 date, number, name...키 값을 활용하여 값을 조회합니다.
+                        let date = interv_case['date']
+                        let number = interv_case['number']
+                        let room = interv_case['room']
+                        let name = interv_case['name']
+                        let sex = interv_case['sex']
+                        let age = interv_case['age']
+                        let site = interv_case['site']
+                        let category = interv_case['category']
+                        let treatment = interv_case['treatment']
+                        let info = interv_case['info']
+
+                        // 6. case  카드를 만듭니다.
+                        let temp_html = '<div id="case-box">\
+                <table id="case_of_cases">\
+                  <tr>\
+                    <td class="col-name">'+ number + '</td>\
+                    <td class="col-tx">'+ category + ' - ' + treatment + '</td>\
+                    <td class="col-narrow" rowspan="3">시술자</td>\
+                    <td class="col-narrow" rowspan="3">변경</td>\
+                    <td class="col-narrow" rowspan="3">Lab</td>\
+                    <td class="col-narrow" rowspan="3">case</td>\
+                  </tr>\
+                  <tr>\
+                    <td class="col-name">'+ name + ' (' + sex + ' / ' + age + '</td>\
+                    <td class="col-tx" rowspan="2">'+ info + '</td>\
+                  </tr>\
+                  <tr>\
+                    <td class="col-name">'+ room + '</td>\
+                  </tr>\
+                </table>\
+              </div>'
+                    // 7. #case-box에 temp_html을 붙입니다.
+                    $('#cases-box').append(temp_html);
+                    }
+                }
+            })
+        }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            background-color: #EBF3F6;
+            color: #2E2833;
+            /* color: #555555; */
+        }
+
+        /* input_box 조절 */
+        #input_box {
+            background-color: #EBF3F6;
+            width: 940px;
+            margin: 20px auto 30px auto;
+            border: 2px solid #52A3A3;
+            border-radius: 10px;
+            padding: 10px 10px 20px 10px;
+            min-width: 450px;
+        }
+
+        /* body teg 퍼온거라 따로 style 지정함. */
+        body {
+            margin: 0;
+            line-height: 1.5;
+            text-align: left;
+            background-color: #EBF3F6;
+            color: #2E2833;
+        }
+
+        /* 기타 소견란 조절 */
+        #input_add_info {
+            width: 30%;
+            height: 200px;
+            text-align: start;
+        }
+
+        /* confrim button */
+        .confirm_btn {
+            text-align: center;
+            margin: 30px auto auto auto;
+        }
+
+        /* 제목 */
+        .head {
+            margin: 30px auto 30px auto;
+            text-align: center;
+        }
+
+        /* tabe head 부위 */
+        #case-box_head {
+            padding: 0px;
+            border-radius: 3px;
+            width: 100%
+        }
+
+        #table_head2 {
+            font-weight: bold;
+            border: 2.5px solid #555555;
+            width: 100%;
+            background-color: whitesmoke;
+            margin: auto;
+
+        }
+
+        /* table 속성 */
+        #case-box {
+            padding: 0px 0px 0px 0px;
+            border-radius: 3px;
+            width: 100%
+        }
+
+        #case_of_cases {
+            border: 2px solid #555555;
+            width: 100%;
+            background-color: whitesmoke;
+            margin: auto;
+        }
+
+        .col-name {
+            width: 20%;
+            text-align: left;
+            padding: 3px;
+        }
+
+        .col-tx {
+            width: 40%;
+            vertical-align: top;
+            padding: 3px;
+        }
+
+        .col-narrow {
+            width: auto;
+            text-align: center;
+            vertical-align: top;
+            padding: 3px;
+        }
+
+        @media (max-width: 450px) {
+            #input_box {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class='head'>
+        <h1><a href="{{url_for('home')}}"> _인터벤션 스케쥴_</a></h1>
+        <h4> <a href="{{url_for('day_schedule')}}">
+                <p id="time-result"></p>
+            </a>
+        </h4>
+        <a href="{{url_for('input_schedule')}}">임시 schedule input 이동 버튼</a>
+    </div>
+
+    <!-- 입력 form 전체 box -->
+    <form id='input_box'>
+        <div id="case-box_head">
+            <table id="table_head2">
+                <tr>
+                    <td class="col-name">환자 / 병실</td>
+                    <td class="col-tx">시술명/비고</td>
+                    <td class="col-narrow">시술자</td>
+                    <td class="col-narrow">변경</td>
+                    <td class="col-narrow">Lab</td>
+                    <td class="col-narrow">case</td>
+                </tr>
+            </table>
+        </div>
+
+
+        <div id="cases-box">
+            <div id="case-box">
+                <table id="case_of_cases">
+                    <tr>
+                        <td class="col-name">등록번호</td>
+                        <td class="col-tx">시술명</td>
+                        <td class="col-narrow" rowspan="3">시술자</td>
+                        <td class="col-narrow" rowspan="3">변경</td>
+                        <td class="col-narrow" rowspan="3">Lab</td>
+                        <td class="col-narrow" rowspan="3">case</td>
+                    </tr>
+                    <tr>
+                        <td class="col-name">이름(성별/나이)</td>
+                        <td class="col-tx" rowspan="2">특이사항</td>
+                    </tr>
+                    <tr>
+                        <td class="col-name">병실</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+
+</body>
+<!-- 소제목 오늘 날짜 -->
+<script type="text/javascript">
+    var d = new Date();
+    var week = new Array('일', '월', '화', '수', '목', '금', '토');
+    var currentDate = d.getFullYear() + "년 " + (d.getMonth() + 1) + "월 " + d.getDate() + "일" + ' ( ' + week[d.getDay()] + '요일 )';
+    var result = document.getElementById("time-result");
+    result.innerHTML = currentDate;
+</script>
+
+</html>
